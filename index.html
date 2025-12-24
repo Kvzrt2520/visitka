@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дмитрий Евдокимов - Портфолио</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7c3aed;
+            --primary-dark: #6d28d9;
+            --secondary-color: #f1f5f9;
+            --text-color: #334155;
+            --light-text: #64748b;
+            --background: #ffffff;
+            --card-bg: #f8fafc;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--background);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(124, 58, 237, 0.2);
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .interests {
+            margin-top: 2rem;
+        }
+
+        .interests h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .interests-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .interests-list li {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .interests-list li:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+        }
+
+        .profile-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            justify-self: center;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .project-card h3 a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-card h3 a:hover {
+            color: var(--primary-color);
+        }
+
+        .project-card p {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-tags span {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: var(--background);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Counter */
+        .counter-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .counter-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .counter-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .counter-btn {
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--light-text);
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .interests-list {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .counter-display {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav>
+            <a href="#" class="logo">Сайт визитка</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active" data-section="home">Главная</a></li>
+                <li><a href="#about" data-section="about">Обо мне</a></li>
+                <li><a href="#projects" data-section="projects">Проекты</a></li>
+                <li><a href="#contact" data-section="contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <!-- Hero Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <h1>Привет, я <span class="highlight">Дмитрий</span></h1>
+            <h1><span class="highlight">Веб-разработчик</span> и студент ВГТУ</h1>
+            <p>Создаю современные веб-приложения с использованием HTML, CSS и JavaScript. Учусь, развиваюсь и превращаю идеи в реальность.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Обо мне</h2>
+                <p>Меня зовут Дмитрий Евдокимов, и я студент Воронежского государственного технического университета. Моя страсть — создание красивых и функциональных веб-приложений.</p>
+                <p>Я постоянно изучаю новые технологии и фреймворки, чтобы оставаться в курсе современных тенденций веб-разработки. Мой подход сочетает в себе внимание к деталям, креативность и техническую экспертизу.</p>
+
+                <div class="interests">
+                    <h3>Мои интересы</h3>
+                    <ul class="interests-list">
+                        <li>Веб-разработка</li>
+                        <li>UI/UX дизайн</li>
+                        <li>JavaScript</li>
+                        <li>React</li>
+                        <li>Путешествия</li>
+                        <li>Чтение</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                     alt="Дмитрий Евдокимов" class="profile-image">
+            </div>
+        </div>
+
+        <div class="counter-section">
+            <h3>Интерактивный счетчик</h3>
+            <div class="counter-display" id="counter">0</div>
+            <button class="btn counter-btn" id="counterBtn">Нажми меня!</button>
+            <p style="margin-top: 1rem; color: var(--light-text);">Количество кликов</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Мои проекты</h2>
+        <p style="text-align: center; color: var(--light-text); max-width: 600px; margin: 0 auto 3rem;">
+            Вот некоторые из моих последних проектов, которые демонстрируют мои навыки в веб-разработке
+        </p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="calculator.jpg"
+                     alt="Калькулятор расходов" class="project-image">
+                <h3><a href="https://example.com" target="_blank">Калькулятор месячных расходов</a></h3>
+                <p>Веб-приложение для учета доходов и расходов с автоматическим подсчетом бюджета, визуализацией статистики и напоминаниями о платежах.</p>
+                <div class="project-tags">
+                    <span>JavaScript</span>
+                    <span>HTML/CSS</span>
+                    <span>Chart.js</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="taimer.jpg"
+                     alt="Таймер Pomodoro" class="project-image">
+                <h3><a href="https://example.com" target="_blank">Таймер Pomodoro</a></h3>
+                <p>Таймер для техники Pomodoro с настраиваемыми интервалами, статистикой продуктивности и уведомлениями. Помогает сосредоточиться на задачах.</p>
+                <div class="project-tags">
+                    <span>React</span>
+                    <span>CSS Modules</span>
+                    <span>LocalStorage</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="generator.jpg"
+                     alt="Генератор цитат" class="project-image">
+                <h3><a href="https://example.com" target="_blank">Генератор мотивирующих цитат</a></h3>
+                <p>Приложение с коллекцией вдохновляющих цитат. Позволяет сохранять любимые цитаты, делиться ими в социальных сетях и получать ежедневные мотивации.</p>
+                <div class="project-tags">
+                    <span>Vue.js</span>
+                    <span>REST API</span>
+                    <span>Firebase</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Связаться со мной</h2>
+        <p style="text-align: center; color: var(--light-text); max-width: 600px; margin: 0 auto 3rem;">
+            Есть вопросы или предложения? Напишите мне, и я свяжусь с вами в ближайшее время
+        </p>
+
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" required placeholder="Ваше имя">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" required placeholder="Расскажите о вашем проекте или задайте вопрос..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-submit">Отправить сообщение</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Дмитрий Евдокимов. Все права защищены.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Студент ВГТУ | Веб-разработчик</p>
+    </div>
+</footer>
+
+<script>
+    // Navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('.section');
+        const userName = localStorage.getItem('userName');
+
+        // Greet user if name exists
+        if (!userName) {
+            setTimeout(() => {
+                const name = prompt('Привет! Как вас зовут?')?.trim();
+                if (name) {
+                    localStorage.setItem('userName', name);
+                    showNotification(`Приятно познакомиться, ${name}!`);
+                }
+            }, 1000);
+        } else {
+            showNotification(`С возвращением, ${userName}!`);
+        }
+
+        // Navigation functionality
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.getAttribute('data-section');
+
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Show selected section
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                    }
+                });
+
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Counter functionality
+        let clickCount = localStorage.getItem('clickCount') ? parseInt(localStorage.getItem('clickCount')) : 0;
+        const counterDisplay = document.getElementById('counter');
+        const counterBtn = document.getElementById('counterBtn');
+
+        counterDisplay.textContent = clickCount;
+
+        counterBtn.addEventListener('click', () => {
+            clickCount++;
+            counterDisplay.textContent = clickCount;
+            localStorage.setItem('clickCount', clickCount);
+
+            // Add animation
+            counterDisplay.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                counterDisplay.style.transform = 'scale(1)';
+            }, 300);
+
+            // Change button text occasionally
+            if (clickCount % 10 === 0) {
+                const messages = [
+                    'Отлично!', 'Продолжайте!', 'Вперед!',
+                    'Удивительно!', 'Потрясающе!', 'Невероятно!'
+                ];
+                counterBtn.textContent = messages[Math.floor(Math.random() * messages.length)];
+                setTimeout(() => {
+                    counterBtn.textContent = 'Нажмите снова!';
+                }, 1000);
+            }
+        });
+
+        // Contact form
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            // Simulate form submission
+            contactForm.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Сообщение отправлено!</h3>
+                        <p style="color: var(--light-text);">Спасибо, ${data.name}! Я свяжусь с вами в ближайшее время.</p>
+                        <button type="button" class="btn" onclick="resetForm()" style="margin-top: 2rem;">Отправить ещё одно сообщение</button>
+                    </div>
+                `;
+        });
+
+        // Notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--primary-color);
+                    color: white;
+                    padding: 1rem 2rem;
+                    border-radius: 12px;
+                    box-shadow: var(--shadow);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+
+            // Add keyframes for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+            document.head.appendChild(style);
+        }
+    });
+
+    // Reset form function
+    function resetForm() {
+        location.reload();
+    }
+</script>
+</body>
+</html>
